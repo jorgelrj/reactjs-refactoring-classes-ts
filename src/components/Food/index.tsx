@@ -1,11 +1,29 @@
 import { Component } from 'react';
 import { FiEdit3, FiTrash } from 'react-icons/fi';
-
+import { api } from '../../services/api';
 import { Container } from './styles';
-import api from '../../services/api';
 
-class Food extends Component {
-  constructor(props) {
+interface FoodProps {
+  food: Food;
+  handleEditFood: (food: Food) => void;
+  handleDelete: (foodId: number) => void;
+}
+
+interface FoodState {
+  isAvailable: boolean;
+}
+
+interface Food {
+  id: number;
+  available: boolean;
+  image: string;
+  name: string;
+  description: string;
+  price: string;
+}
+
+class Food extends Component<FoodProps, FoodState> {
+  constructor(props: FoodProps) {
     super(props);
 
     const { available } = this.props.food;
